@@ -21,8 +21,3 @@ if not is_admin:
             exit(0)
         elif prompt.upper() == "N":
             break
-
-
-t2.ripdns()
-
-input()
