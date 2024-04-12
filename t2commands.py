@@ -29,9 +29,9 @@ def cls():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def rna(adapter: int = -1, name: str = ""):
+def rna(adapter: int = 0, name: str = ""):
     '''
-    Restart Network Adapter
+    Restart Network Adapter *NEEDS ADMIN
     :param adapter: Select which adapter to restart (0=Wi-Fi, 1=Ethernet, 2=Other)
     :param name: Name of the network adapter you want to restart (adapter=2)
     :raises ValueError: If `adapter` is not between 0 and 2
@@ -41,3 +41,17 @@ def rna(adapter: int = -1, name: str = ""):
     else:
         adapter_list = ["Wi-Fi", "Ethernet", name]
         os.system('powershell -command "(Restart-NetAdapter -Name "' + adapter_list[adapter] + '")"')
+
+
+def ripdns():
+    '''
+    Reset IP and DNS *NEEDS ADMIN
+    Release and renew IP address and flush DNS
+    '''
+    os.system("ipconfig /release")
+    os.system("ipconfig /renew")
+    os.system("arp -d *")
+    os.system("nbtstat -R")
+    os.system("nbtstat -RR")
+    os.system("ipconfig /flushdns")
+    os.system("ipconfig /registerdns")
